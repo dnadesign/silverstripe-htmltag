@@ -133,7 +133,7 @@ class HTMLTag extends ViewableData
     public function setClass($value)
     {
         $classes = [];
-        foreach (explode(' ', $value) as $class) {
+        foreach (explode(' ', $value ?? '') as $class) {
             $classes[$class] = $class;
         }
         $this->classes = $classes;
