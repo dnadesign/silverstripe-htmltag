@@ -2,7 +2,7 @@
 
 namespace gorriecoe\HTMLTag\View;
 
-use SilverStripe\View\ViewableData;
+use SilverStripe\Model\ModelData;
 use SilverStripe\Core\Convert;
 use InvalidArgumentException;
 
@@ -11,7 +11,7 @@ use InvalidArgumentException;
  *
  * @package silverstripe-htmltag
  */
-class HTMLTag extends ViewableData
+class HTMLTag extends ModelData
 {
     /**
      * List of HTML5 void elements
@@ -66,7 +66,7 @@ class HTMLTag extends ViewableData
     {
         $this->string = $string;
         $this->tag = strtolower($tag);
-        parent::__construct($string);
+        parent::__construct();
     }
 
     /**
@@ -86,7 +86,7 @@ class HTMLTag extends ViewableData
      * @param string $value Attribute value
      * @return HTMLTag $this
      */
-    public function addAttribute($name, $value)
+    public function addAttribute($name = null, $value)
     {
         if ($value) {
             $this->attributes[$name] = $value;
@@ -97,7 +97,7 @@ class HTMLTag extends ViewableData
     /**
      * @alias addAttribute
      */
-    public function setAttribute($name, $value)
+    public function setAttribute($name = null, $value)
     {
         $this->addAttribute($name, $value);
         return $this;
@@ -133,7 +133,7 @@ class HTMLTag extends ViewableData
     public function setClass($value)
     {
         $classes = [];
-        foreach (explode(' ', $value ?? '') as $class) {
+        foreach (explode(' ', $value) as $class) {
             $classes[$class] = $class;
         }
         $this->classes = $classes;
@@ -260,8 +260,8 @@ class HTMLTag extends ViewableData
      * Returns the rendered html markup
      * @return string
      */
-    public function forTemplate()
+    public function forTemplate(): string
     {
-        return $this->Render();
+        return (string) $this->Render();
     }
 }
