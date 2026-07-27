@@ -86,7 +86,7 @@ class HTMLTag extends ModelData
      * @param string $value Attribute value
      * @return HTMLTag $this
      */
-    public function addAttribute($name = null, $value)
+    public function addAttribute($name, $value)
     {
         if ($value) {
             $this->attributes[$name] = $value;
@@ -97,7 +97,7 @@ class HTMLTag extends ModelData
     /**
      * @alias addAttribute
      */
-    public function setAttribute($name = null, $value)
+    public function setAttribute($name, $value)
     {
         $this->addAttribute($name, $value);
         return $this;
